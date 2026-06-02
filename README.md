@@ -5,6 +5,8 @@
 🔗 **Live:** https://dsql-drop-app.vercel.app · **Architecture:** https://dsql-drop-app.vercel.app/architecture
 Built for the **H0 hackathon** (*Hack the Zero Stack with Vercel v0 and AWS Databases*) · `#H0Hackathon`
 
+**English** | [日本語](README.ja.md)
+
 ---
 
 When a limited drop goes live, thousands of buyers press **Buy** in the same second. The classic failures — overselling, double-booking, crashing — are really one failure: **losing track of a single number under global concurrency.** DROPZERO sells *exactly* its stock and not one unit more, no matter how many buyers hit it at once or which region they come from.
