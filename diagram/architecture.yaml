@@ -1,0 +1,136 @@
+Diagram:
+  DefinitionFiles:
+    - Type: URL
+      Url: "https://raw.githubusercontent.com/awslabs/diagram-as-code/main/definitions/definition-for-aws-icons-light.yaml"
+    - Type: URL
+      Url: "https://github.com/yama3133/diagram-ai-icons/releases/latest/download/external-icons.yaml"
+
+  Resources:
+    Canvas:
+      Type: AWS::Diagram::Canvas
+      Direction: vertical
+      Align: center
+      Children:
+        - Buyers
+        - Vercel
+        - AWSCloud
+
+    Buyers:
+      Type: AWS::Diagram::Resource
+      Preset: Users
+      Title: "Buyers worldwide"
+
+    Vercel:
+      Type: External::Vercel
+      Title: "Vercel - Next.js (v0 UI + API)"
+
+    AWSCloud:
+      Type: AWS::Diagram::Cloud
+      Preset: AWSCloudNoLogo
+      Direction: vertical
+      Align: center
+      Children:
+        - IAMRole
+        - DSQLRegions
+        - DataModel
+
+    IAMRole:
+      Type: AWS::IAM::Role
+      Title: "IAM Role (Vercel OIDC)"
+
+    DSQLRegions:
+      Type: AWS::Diagram::HorizontalStack
+      Children:
+        - TokyoRegion
+        - SeoulRegion
+        - OsakaRegion
+
+    TokyoRegion:
+      Type: AWS::Region
+      Direction: vertical
+      Title: "ap-northeast-1 (active)"
+      Children:
+        - TokyoDSQL
+    TokyoDSQL:
+      Type: AWS::Diagram::Resource
+      Preset: "Amazon Aurora"
+      Title: "Aurora DSQL"
+
+    SeoulRegion:
+      Type: AWS::Region
+      Direction: vertical
+      Title: "ap-northeast-2 (active)"
+      Children:
+        - SeoulDSQL
+    SeoulDSQL:
+      Type: AWS::Diagram::Resource
+      Preset: "Amazon Aurora"
+      Title: "Aurora DSQL"
+
+    OsakaRegion:
+      Type: AWS::Region
+      Direction: vertical
+      Title: "ap-northeast-3 (witness)"
+      Children:
+        - OsakaDSQL
+    OsakaDSQL:
+      Type: AWS::Diagram::Resource
+      Preset: "Amazon Aurora"
+      Title: "DSQL witness"
+
+    DataModel:
+      Type: AWS::Diagram::HorizontalStack
+      Title: "Data model (Aurora DSQL) - purchase = check+decrement in 1 tx; OCC retry; never oversell"
+      Children:
+        - TblProducts
+        - TblInventory
+        - TblOrders
+    TblProducts:
+      Type: AWS::Diagram::Resource
+      Preset: "Table"
+      Title: "products"
+    TblInventory:
+      Type: AWS::Diagram::Resource
+      Preset: "Table"
+      Title: "inventory (single stock row) - OCC: never oversell"
+    TblOrders:
+      Type: AWS::Diagram::Resource
+      Preset: "Table"
+      Title: "orders"
+
+  Links:
+    - Source: Buyers
+      SourcePosition: S
+      Target: Vercel
+      TargetPosition: N
+      TargetArrowHead:
+        Type: Open
+      Type: orthogonal
+    - Source: Vercel
+      SourcePosition: S
+      Target: IAMRole
+      TargetPosition: N
+      TargetArrowHead:
+        Type: Open
+      Type: orthogonal
+    - Source: IAMRole
+      SourcePosition: S
+      Target: TokyoDSQL
+      TargetPosition: N
+      TargetArrowHead:
+        Type: Open
+      Type: straight
+    - Source: IAMRole
+      SourcePosition: S
+      Target: SeoulDSQL
+      TargetPosition: N
+      TargetArrowHead:
+        Type: Open
+      Type: straight
+    - Source: TokyoDSQL
+      SourcePosition: E
+      Target: SeoulDSQL
+      TargetPosition: W
+      TargetArrowHead:
+        Type: Open
+      Type: straight

@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #07070b;
+  --foreground: #f4f4f5;
 }
 
 @theme inline {
@@ -10,17 +10,32 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-acid: #c5ff36;
+  --color-danger: #ff4d6d;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+@keyframes dz-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes dz-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes dz-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes dz-flash {
+  0% { color: var(--color-danger); transform: scale(1.06); }
+  100% { color: inherit; transform: scale(1); }
+}
+@keyframes dz-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
+  50% { box-shadow: 0 0 26px 1px rgba(255, 77, 109, 0.45); }
 }

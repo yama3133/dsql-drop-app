@@ -1,0 +1,79 @@
+1
+00:00:00,000 --> 00:00:07,000
+Limited drops trigger a worldwide stampede the instant they go live.
+
+2
+00:00:07,000 --> 00:00:18,000
+Tickets and limited releases routinely oversell, double-book, and crash — and no one even knows who actually got one.
+
+3
+00:00:18,000 --> 00:00:30,000
+DROPZERO is a drop platform that never oversells, no matter how many millions hit it at once.
+
+4
+00:00:30,000 --> 00:00:38,000
+Here's the app — built with v0 and deployed on Vercel.
+
+5
+00:00:38,000 --> 00:00:52,000
+Stock updates in real time, and a purchase returns a confirmed order.
+
+6
+00:00:52,000 --> 00:01:10,000
+It speaks eight languages, with full right-to-left layout for Arabic.
+
+7
+00:01:10,000 --> 00:01:18,000
+Here's the heart of it — one single unit in stock.
+
+8
+00:01:18,000 --> 00:01:30,000
+We fire two purchases at the very same instant: one to Tokyo, one to Seoul — two different regions.
+
+9
+00:01:30,000 --> 00:01:42,000
+Amazon Aurora DSQL's multi-region strong consistency means exactly one wins.
+
+10
+00:01:42,000 --> 00:02:10,000
+Stock never goes negative, and both regions agree on the result.
+
+11
+00:02:10,000 --> 00:02:22,000
+Now let's scale it: a hundred units, and three thousand concurrent purchases across both regions.
+
+12
+00:02:22,000 --> 00:02:36,000
+The result — exactly one hundred confirmed, everything else sold out, zero errors.
+
+13
+00:02:36,000 --> 00:03:00,000
+Thousands of buyers, and we sell precisely our stock — never one more.
+
+14
+00:03:00,000 --> 00:03:09,000
+Here's how it works. The frontend is on Vercel.
+
+15
+00:03:09,000 --> 00:03:22,000
+Auth uses OIDC federation to assume an AWS IAM role and mint a DSQL token — zero hardcoded secrets.
+
+16
+00:03:22,000 --> 00:03:32,000
+Each purchase checks and decrements stock in one transaction; concurrency conflicts are absorbed by retries.
+
+17
+00:03:32,000 --> 00:03:40,000
+This is only this clean because Aurora DSQL is multi-region and strongly consistent.
+
+18
+00:03:40,000 --> 00:03:50,000
+Zero oversell is fairness — against bots, against chaos.
+
+19
+00:03:50,000 --> 00:03:56,000
+Anywhere on earth, everyone sees one single source of truth.
+
+20
+00:03:56,000 --> 00:04:00,000
+DROPZERO: global drops that never oversell.

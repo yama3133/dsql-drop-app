@@ -6,21 +6,35 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "tsx db/migrate.ts",
+    "db:seed": "tsx db/seed.ts",
+    "db:test": "tsx db/test.ts",
+    "db:concurrency": "tsx db/concurrency-test.ts",
+    "db:mr-setup": "tsx db/mr-setup.ts",
+    "db:mr-test": "tsx db/multiregion-test.ts"
   },
   "dependencies": {
+    "@aws/aurora-dsql-node-postgres-connector": "^0.1.9",
+    "@vercel/functions": "^3.6.1",
+    "@vercel/oidc-aws-credentials-provider": "^3.1.2",
+    "dotenv": "^17.4.2",
     "next": "16.2.6",
+    "pg": "^8.21.0",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.20.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
+    "tsx": "^4.22.4",
     "typescript": "^5"
   }
 }
