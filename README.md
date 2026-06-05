@@ -15,6 +15,12 @@ When a limited drop goes live, thousands of buyers press **Buy** in the same sec
 
 DROPZERO leans on the one thing that makes "never oversell across regions" clean: Aurora DSQL is a **serverless, distributed SQL database with multi-Region, active-active clusters that are strongly consistent.** A buyer in Tokyo and a buyer in Seoul racing for the last unit are resolved against the same truth — exactly one wins, and the stock counter never goes negative.
 
+### See it — two regions race for the last unit
+
+![Two-region simultaneous purchase](demo/mr-test.gif)
+
+*Stock = 1. Tokyo and Seoul fire a purchase at the same instant — exactly one wins, the other gets sold-out, and the counter never goes negative.*
+
 ## Architecture
 
 ![Architecture](diagram/dropzero-aws.png)
